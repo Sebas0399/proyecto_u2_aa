@@ -1,45 +1,38 @@
 package com.uce.edu.demo.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uce.edu.demo.repository.IPersonaJdbcRepository;
-import com.uce.edu.demo.to.PersonaTo;
-
+import com.uce.edu.demo.repository.IPersonaJpaRepository;
+import com.uce.edu.demo.repository.modelo.Persona;
 @Service
-public class PersonaJdbcServiceImpl implements IPersonaJdbcService{
+public class PersonaJpaServiceImpl implements IPersonaJpaService{
+	
+	
 	@Autowired
-	private IPersonaJdbcRepository personaRepo;
+	private IPersonaJpaRepository personaRepo;
 	@Override
-	public PersonaTo buscar(int id) {
+	public Persona buscar(Integer id) {
 		// TODO Auto-generated method stub
 		return this.personaRepo.buscar(id);
 	}
 
 	@Override
-	public void guardar(PersonaTo persona) {
+	public void insertar(Persona persona) {
 		// TODO Auto-generated method stub
 		this.personaRepo.insertar(persona);
 	}
 
 	@Override
-	public void actualizar(PersonaTo persona) {
+	public void actualizar(Persona persona) {
 		// TODO Auto-generated method stub
 		this.personaRepo.actualizar(persona);
 	}
 
 	@Override
-	public void eliminar(int id) {
+	public void eliminar(Integer id) {
 		// TODO Auto-generated method stub
 		this.personaRepo.eliminar(id);
-	}
-
-	@Override
-	public List<PersonaTo> buscarTodos() {
-		// TODO Auto-generated method stub
-		return this.personaRepo.buscarTodos();
 	}
 
 }
