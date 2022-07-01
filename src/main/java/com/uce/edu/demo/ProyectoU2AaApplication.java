@@ -7,12 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.service.IEstudianteJdbcService;
-import com.uce.edu.demo.to.Estudiante;
+import com.uce.edu.demo.repository.modelo.Estudiante;
+import com.uce.edu.demo.service.IEstudianteJpaService;
 @SpringBootApplication
 public class ProyectoU2AaApplication implements CommandLineRunner{
 	@Autowired
-	private IEstudianteJdbcService estudianteService;
+	private IEstudianteJpaService estudianteService;
 	private static Logger LOG=LogManager.getLogger(ProyectoU2AaApplication.class.getName());
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AaApplication.class, args);

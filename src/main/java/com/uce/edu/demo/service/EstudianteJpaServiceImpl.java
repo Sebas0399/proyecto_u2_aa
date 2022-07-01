@@ -3,12 +3,12 @@ package com.uce.edu.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.uce.edu.demo.repository.IEstudianteJdbcRepository;
-import com.uce.edu.demo.to.Estudiante;
+import com.uce.edu.demo.repository.IEstudianteJpaRepository;
+import com.uce.edu.demo.repository.modelo.Estudiante;
 @Service
-public class EstudianteJdbcServiceImpl implements IEstudianteJdbcService{
+public class EstudianteJpaServiceImpl implements IEstudianteJpaService {
 	@Autowired
-	private IEstudianteJdbcRepository estudianteRepo;
+	private IEstudianteJpaRepository estudianteRepo;
 	@Override
 	public Estudiante buscar(String cedula) {
 		// TODO Auto-generated method stub
