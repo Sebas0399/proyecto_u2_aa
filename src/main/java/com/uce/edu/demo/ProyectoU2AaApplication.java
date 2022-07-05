@@ -22,17 +22,22 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		//buscar
+		//LOG.info(this.personaService.buscar(2));
+		//guardar
 		Persona p=new Persona();
-		p.setId(3);
-		p.setNombre("Jose");
-		p.setApellido("Pedrerol");
-//		this.personaService.insertar(p);
-		
+//		p.setId(7);
+		p.setNombre("Pedro");
+		p.setApellido("Muñoz");
+        this.personaService.insertar(p);
+		//actualizar
 		Persona p2=new Persona();
-		p2.setId(3);
+//		p2.setId(4);
 		p2.setNombre("Juan");
-		p2.setApellido("Pedrerol");
-		this.personaService.actualizar(p2);
+		p2.setApellido("Jimenez");
+		//this.personaService.actualizar(p2);
+		//eliminar
+		//this.personaService.eliminar(2);
 	}
 
 }
