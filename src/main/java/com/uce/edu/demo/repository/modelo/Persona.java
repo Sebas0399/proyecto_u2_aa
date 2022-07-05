@@ -15,9 +15,9 @@ public class Persona {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator="name_generator")
 	@SequenceGenerator(name="name_generator",sequenceName="pers_id_seq",allocationSize = 1)
 	private Integer id;
-	@Column(name="nombre")
+	@Column(name="pers_nombre")
 	private String nombre;
-	@Column(name="apellido")
+	@Column(name="pers_apellido")
 	private String apellido;
 	//set y get
 	public Integer getId() {
