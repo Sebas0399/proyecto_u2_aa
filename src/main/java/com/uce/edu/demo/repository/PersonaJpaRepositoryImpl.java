@@ -1,7 +1,10 @@
 package com.uce.edu.demo.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -35,6 +38,30 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository{
 		// TODO Auto-generated method stub
 		Persona persona=this.buscar(id);
 		this.entityManager.remove(persona);
+	}
+
+	@Override
+	public Persona buscar(String cedula) {
+		// TODO Auto-generated method stub
+		Query jpqlQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.cedula=:cedula");
+		jpqlQuery.setParameter("cedula", cedula);
+		
+		return (Persona) jpqlQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Persona> buscarPorApellido(String apellido) {
+		// TODO Auto-generated method stub
+		Query jpqlQuery=this.entityManager.createQuery("SELECT p FROM Persona p WHERE p.apellido=:apellido");
+		jpqlQuery.setParameter("apellido", apellido);
+		
+		return jpqlQuery.getResultList();
+	}
+
+	@Override
+	public List<Persona> buscarPorGenero(String genero) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.uce.edu.demo;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,10 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 		Persona p=new Persona();
 //		p.setId(7);
 		p.setNombre("Pedro");
-		p.setApellido("Muñoz");
-        this.personaService.insertar(p);
+		p.setApellido("Jimenez");
+		p.setGenero("M");
+		p.setCedula("0201114033");
+//        this.personaService.insertar(p);
 		//actualizar
 		Persona p2=new Persona();
 //		p2.setId(4);
@@ -38,6 +42,11 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 		//this.personaService.actualizar(p2);
 		//eliminar
 		//this.personaService.eliminar(2);
+		List<Persona>listaPersonas=this.personaService.buscarPorApellido("Muñoz");
+		for(Persona persona:listaPersonas) {
+			LOG.info(persona);
+		}
+		
 	}
 
 }

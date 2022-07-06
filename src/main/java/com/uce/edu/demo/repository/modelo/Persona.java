@@ -17,8 +17,26 @@ public class Persona {
 	private Integer id;
 	@Column(name="pers_nombre")
 	private String nombre;
+	@Column(name="pers_cedula")
+	private String cedula;
 	@Column(name="pers_apellido")
 	private String apellido;
+	
+	@Column(name="pers_genero")
+	private String genero;
+	
+	public String getCedula() {
+		return cedula;
+	}
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+	public String getGenero() {
+		return genero;
+	}
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
 	//set y get
 	public Integer getId() {
 		return id;
@@ -40,7 +58,7 @@ public class Persona {
 	}
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + "]";
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", genero=" + genero + "]";
 	}
 	
 }
