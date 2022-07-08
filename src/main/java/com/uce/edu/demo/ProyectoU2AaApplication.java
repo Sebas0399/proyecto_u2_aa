@@ -42,7 +42,7 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 		//this.personaService.actualizar(p2);
 		//eliminar
 		//this.personaService.eliminar(2);
-		List<Persona>listaPersonas=this.personaService.buscarPorApellido("Muñoz");
+		List<Persona>listaPersonas=this.personaService.buscarPorGenero("M");
 		for(Persona persona:listaPersonas) {
 			LOG.info(persona);
 		}
