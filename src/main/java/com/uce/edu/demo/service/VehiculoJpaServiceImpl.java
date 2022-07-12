@@ -1,5 +1,7 @@
 package com.uce.edu.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,24 @@ public class VehiculoJpaServiceImpl implements IVehiculoJpaService{
 	public void eliminar(Integer id) {
 		// TODO Auto-generated method stub
 		this.vehiculoRepo.eliminar(id);
+	}
+
+	@Override
+	public List<Vehiculo> buscarTyped(String marca) {
+		// TODO Auto-generated method stub
+		return this.vehiculoRepo.buscarTyped(marca);
+	}
+
+	@Override
+	public Vehiculo buscarNamed(String placa) {
+		// TODO Auto-generated method stub
+		return this.vehiculoRepo.buscarNamed(placa);
+	}
+
+	@Override
+	public Vehiculo buscarNamedTyped(String marca, String placa) {
+		// TODO Auto-generated method stub
+		return this.vehiculoRepo.buscarNamedTyped(marca, placa);
 	}
 
 }

@@ -18,4 +18,8 @@ public interface IPropietarioJpaRepository {
 	 
 	 public int actualizarPorApellido(LocalDateTime fecha,String apellido);
 	 public int eliminarPorNacimiento(LocalDateTime fecha);
+	 
+	 public Propietario buscarTyped(String cedula);
+	 public Propietario buscarNamed(String cedula);
+	 public Propietario buscarNamedTyped(String nombre,String apellido);
 }

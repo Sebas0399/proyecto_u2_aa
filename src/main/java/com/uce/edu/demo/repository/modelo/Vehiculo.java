@@ -7,10 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 @Entity
 @Table(name="vehiculo")
+@NamedQueries({@NamedQuery(name = "Vehiculo.buscarPorPlaca", query = "SELECT v FROM Vehiculo v WHERE v.placa=:placa"),
+@NamedQuery(name = "Vehiculo.buscarPorMarcaPlaca", query = "SELECT v FROM Vehiculo v WHERE v.marca=:marca AND v.placa=:placa")})
 public class Vehiculo {
 	@Id
 	@Column(name="id_vehi")

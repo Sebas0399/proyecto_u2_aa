@@ -1,7 +1,11 @@
 package com.uce.edu.demo.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -39,5 +43,32 @@ public class VehiculoJpaRepositoryImpl implements IVehiculoJpaRepository{
 		// TODO Auto-generated method stub
 		Vehiculo v=this.buscar(id);
 		this.entityManager.remove(v);;
+	}
+
+	@Override
+	public List<Vehiculo> buscarTyped(String marca) {
+		// TODO Auto-generated method stub
+		TypedQuery<Vehiculo> miTypedQuery = this.entityManager
+				.createQuery("SELECT v FROM Vehiculo v WHERE v.marca=:marca", Vehiculo.class);
+		miTypedQuery.setParameter("marca", marca);
+		return miTypedQuery.getResultList();
+	}
+
+	@Override
+	public Vehiculo buscarNamed(String placa) {
+		// TODO Auto-generated method stub
+		Query myQuery=this.entityManager.createNamedQuery("Vehiculo.buscarPorPlaca");
+		myQuery.setParameter("placa", placa);
+		return (Vehiculo) myQuery.getSingleResult();
+	}
+
+	@Override
+	public Vehiculo buscarNamedTyped(String marca, String placa) {
+		// TODO Auto-generated method stub
+		TypedQuery<Vehiculo> miTypedQuery=this.entityManager.createNamedQuery("Vehiculo.buscarPorMarcaPlaca",Vehiculo.class);
+		miTypedQuery.setParameter("marca", marca);
+		miTypedQuery.setParameter("placa", placa);
+
+		return miTypedQuery.getSingleResult();
 	}
 }

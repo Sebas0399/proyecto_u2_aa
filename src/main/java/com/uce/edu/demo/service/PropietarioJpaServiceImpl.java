@@ -67,4 +67,22 @@ public class PropietarioJpaServiceImpl implements IPropietarioJpaService{
 		return this.propietarioRepo.eliminarPorNacimiento(fecha);
 	}
 
+	@Override
+	public Propietario buscarTyped(String cedula) {
+		// TODO Auto-generated method stub
+		return this.propietarioRepo.buscarTyped(cedula);
+	}
+
+	@Override
+	public Propietario buscarNamed(String cedula) {
+		// TODO Auto-generated method stub
+		return this.propietarioRepo.buscarNamed(cedula);
+	}
+
+	@Override
+	public Propietario buscarNamedTyped(String nombre, String apellido) {
+		// TODO Auto-generated method stub
+		return this.propietarioRepo.buscarNamedTyped(nombre, apellido);
+	}
+
 }
