@@ -33,12 +33,12 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 //		Persona persTypedNamed=this.personaService.buscarNamedTyped("0201114022");
 //		LOG.info("Persona NamedTyped: "+persTypedNamed);
 		
-		List<Persona> listaPers=this.personaService.buscarPorNombreApellido("Zambrano", "Zambrano");
-		for(Persona p: listaPers) {
-			LOG.info(p);
-		}
+//		List<Persona> listaPers=this.personaService.buscarPorNombreApellido("Zambrano", "Zambrano");
+//		for(Persona p: listaPers) {
+//			LOG.info(p);
+//		}
 		//LOG.info(listaPers);
-
+		LOG.info(personaService.buscarNamedNative("0201114022"));
 
 	}
 

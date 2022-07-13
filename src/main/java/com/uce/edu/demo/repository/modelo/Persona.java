@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
@@ -16,6 +18,8 @@ import javax.persistence.Table;
 //@NamedQuery(name = "Persona.buscarPorNombreApellido", query = "SELECT p FROM Persona p WHERE p.nombre=:nombre AND p.apellido=:apellido")
 @NamedQueries({@NamedQuery(name = "Persona.buscarPorCedula", query = "SELECT p FROM Persona p WHERE p.cedula=:cedula"),
 @NamedQuery(name = "Persona.buscarPorNombreApellido", query = "SELECT p FROM Persona p WHERE p.nombre=:nombre AND p.apellido=:apellido")})
+@NamedNativeQueries({@NamedNativeQuery(name="Persona.buscarPorCedulaNative",query="SELECT * FROM persona WHERE pers_cedula=:cedula",resultClass = Persona.class),
+@NamedNativeQuery(name="Persona.buscarPorApellidoNative",query="SELECT * FROM persona WHERE pers_apellido=:apellido",resultClass = Persona.class)})
 public class Persona {
 	@Id
 	@Column(name = "id")
