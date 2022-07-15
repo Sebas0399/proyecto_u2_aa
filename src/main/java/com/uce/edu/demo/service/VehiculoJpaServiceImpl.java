@@ -54,4 +54,28 @@ public class VehiculoJpaServiceImpl implements IVehiculoJpaService{
 		return this.vehiculoRepo.buscarNamedTyped(marca, placa);
 	}
 
+	@Override
+	public Vehiculo buscarNativePlaca(String placa) {
+		// TODO Auto-generated method stub
+		return this.buscarNativePlaca(placa);
+	}
+
+	@Override
+	public List<Vehiculo> buscarNativeTipo(String tipo) {
+		// TODO Auto-generated method stub
+		return this.buscarNativeTipo(tipo);
+	}
+
+	@Override
+	public Vehiculo buscarNamedNativePlaca(String placa) {
+		// TODO Auto-generated method stub
+		return this.buscarNamedNativePlaca(placa);
+	}
+
+	@Override
+	public List<Vehiculo> buscarNamedNativeMarca(String placa) {
+		// TODO Auto-generated method stub
+		return this.buscarNamedNativeMarca(placa);
+	}
+
 }

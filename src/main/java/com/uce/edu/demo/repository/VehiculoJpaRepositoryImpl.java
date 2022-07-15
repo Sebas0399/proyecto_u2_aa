@@ -71,4 +71,39 @@ public class VehiculoJpaRepositoryImpl implements IVehiculoJpaRepository{
 
 		return miTypedQuery.getSingleResult();
 	}
+
+	@Override
+	public Vehiculo buscarNativePlaca(String placa) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM vehiculo WHERE placa_vehi=:placa",
+				Vehiculo.class);
+		myQuery.setParameter("placa", placa);
+		return (Vehiculo) myQuery.getSingleResult();
+		
+	}
+
+	@Override
+	public List<Vehiculo> buscarNativeTipo(String tipo) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("SELECT * FROM vehiculo WHERE tipo_vehi=:tipo",
+				Vehiculo.class);
+		myQuery.setParameter("tipo", tipo);
+		return (List<Vehiculo>) myQuery.getResultList();
+	}
+
+	@Override
+	public Vehiculo buscarNamedNativePlaca(String placa) {
+		// TODO Auto-generated method stub
+		TypedQuery<Vehiculo> miTypedQuery=this.entityManager.createNamedQuery("Vehiculo.buscarPorPlacaNative",Vehiculo.class);
+		miTypedQuery.setParameter("placa", placa);
+		return miTypedQuery.getSingleResult();
+	}
+
+	@Override
+	public List<Vehiculo> buscarNamedNativeMarca(String marca) {
+		// TODO Auto-generated method stub
+		TypedQuery<Vehiculo> miTypedQuery=this.entityManager.createNamedQuery("Vehiculo.buscarPorMarcaNative",Vehiculo.class);
+		miTypedQuery.setParameter("marca", marca);
+		return miTypedQuery.getResultList();
+	}
 }

@@ -11,6 +11,6 @@ public interface IMatriculaJpaRepository {
 	 public void insertar(Matricula matricula);
 	 public void actualizar(Matricula matricula);
 	 public void eliminar(Integer id);
-	 
+	
 	
 }

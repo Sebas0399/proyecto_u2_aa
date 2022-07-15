@@ -32,35 +32,21 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		
-//		// Propietario
-//		Propietario p=new Propietario();
-//		p.setNombre("Antony");
-//		p.setApellido("Sebastian");
-//		p.setCedula("0201114022");
-//		p.setFechaNacimiento(LocalDateTime.now());
-//		this.propietarioService.insertar(p);
-//		//Vehiculp
-//		Vehiculo v=new Vehiculo();
-//		v.setMarca("Mazda");
-//		v.setPlaca("PBA-155");
-//		v.setPrecio(new BigDecimal("25000"));
-//		v.setTipo("L");
-//		this.vehiculoService.insertar(v);
-//		//Matricula
-//		Matricula m=new Matricula();
-//		m.setFechaMatricula(LocalDateTime.now());
-//		m.setValorMatricula(new BigDecimal("100"));
-//		this.matriculaService.insertar(m);
-		this.propietarioService.buscarNamed("1725776650");
-		this.propietarioService.buscarTyped("0201114022");
-		this.propietarioService.buscarNamedTyped("Antony","Arguello");
+
 		
-		this.vehiculoService.buscarNamed("PBA-145");
-		List<Vehiculo> listaV=this.vehiculoService.buscarTyped("Mazda");
+		LOG.info(this.vehiculoService.buscarNativePlaca("PBA-145"));
+		
+		
+		
+		List<Vehiculo> listaV=this.vehiculoService.buscarNativeTipo("L");
 		for( Vehiculo v:listaV) {
 			LOG.info(v);
 		}
-		this.vehiculoService.buscarNamedTyped("Mazda", "PBA-155");
+	this.vehiculoService.buscarNamedNativePlaca("PBA-145");
+		listaV=this.vehiculoService.buscarNamedNativeMarca("Mazda");
+		for( Vehiculo v:listaV) {
+			LOG.info(v);
+		}
 	}
 
 }

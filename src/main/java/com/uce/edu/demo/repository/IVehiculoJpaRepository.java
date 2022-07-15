@@ -15,4 +15,10 @@ public interface IVehiculoJpaRepository {
 	 public Vehiculo buscarNamed(String placa);
 	 public Vehiculo buscarNamedTyped(String marca,String placa);
 	 
+	 public Vehiculo buscarNativePlaca(String placa);
+	 public List<Vehiculo> buscarNativeTipo(String tipo);
+	 public Vehiculo buscarNamedNativePlaca(String placa);
+	 public List<Vehiculo> buscarNamedNativeMarca(String placa);
+
+	 
 }
