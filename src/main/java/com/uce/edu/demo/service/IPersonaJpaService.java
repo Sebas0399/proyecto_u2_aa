@@ -5,16 +5,13 @@ import java.util.List;
 import com.uce.edu.demo.repository.modelo.Persona;
 
 public interface IPersonaJpaService {
-
-	 public Persona buscar(Integer id);
+	public Persona buscar(Integer id);
 	 public Persona buscar(String cedula);
 	 public Persona buscarTyped(String cedula);
 	 public Persona buscarNamed(String cedula);
 	 public Persona buscarNamedTyped(String cedula);
 	 public Persona buscarNative(String cedula);
 	 public Persona buscarNamedNative(String cedula);
-	 public Persona bucarCriteriaApi(String cedula);
-	 public Persona buscarDinamica(String nombre,String apellido,String genero);
 	 public List<Persona> buscarPorApellido(String apellido);
 	 public List<Persona> buscarPorNombre(String nombre);
 	 public List<Persona> buscarPorNombreApellido(String nombre,String apellido);

@@ -38,8 +38,7 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 //			LOG.info(p);
 //		}
 		//LOG.info(listaPers);
-		Persona p=personaService.buscarDinamica("Pedro","Juan","M");
-		LOG.info(p);
+		LOG.info(personaService.buscarNamedNative("0201114022"));
 
 	}
 

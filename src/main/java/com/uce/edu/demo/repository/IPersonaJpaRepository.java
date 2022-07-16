@@ -13,7 +13,6 @@ public interface IPersonaJpaRepository {
 	 public Persona buscarNative(String cedula);
 	 public Persona buscarNamedNative(String cedula);
 	 public Persona bucarCriteriaApi(String cedula);
-	 public Persona buscarDinamica(String nombre,String apellido,String genero);
 	 public List<Persona> buscarPorApellido(String apellido);
 	 public List<Persona> buscarPorNombre(String nombre);
 	 public List<Persona> buscarPorNombreApellido(String nombre,String apellido);
