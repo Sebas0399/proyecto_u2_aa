@@ -6,6 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -94,6 +98,7 @@ public class VehiculoJpaRepositoryImpl implements IVehiculoJpaRepository{
 	@Override
 	public Vehiculo buscarNamedNativePlaca(String placa) {
 		// TODO Auto-generated method stub
+		
 		TypedQuery<Vehiculo> miTypedQuery=this.entityManager.createNamedQuery("Vehiculo.buscarPorPlacaNative",Vehiculo.class);
 		miTypedQuery.setParameter("placa", placa);
 		return miTypedQuery.getSingleResult();
@@ -105,5 +110,43 @@ public class VehiculoJpaRepositoryImpl implements IVehiculoJpaRepository{
 		TypedQuery<Vehiculo> miTypedQuery=this.entityManager.createNamedQuery("Vehiculo.buscarPorMarcaNative",Vehiculo.class);
 		miTypedQuery.setParameter("marca", marca);
 		return miTypedQuery.getResultList();
+	}
+
+	@Override
+	public List<Vehiculo> buscaDinamicaMarca(String marca) {
+		// TODO Auto-generated method stub
+		//Select v from Vehiculo Where v.marca:=marca
+		CriteriaBuilder builder=this.entityManager.getCriteriaBuilder();
+		//Especificamos el tipo de retorno
+		CriteriaQuery< Vehiculo> myQuery=builder.createQuery(Vehiculo.class);
+		//Construimos el sql
+		Root<Vehiculo>vehiculoRoot=myQuery.from(Vehiculo.class);//From persona
+		myQuery.select(vehiculoRoot);//select Vehiculo
+		
+		Predicate p=builder.equal(vehiculoRoot.get("marca"),marca );//where v.marca=marca
+		CriteriaQuery<Vehiculo> myQueryCompleto=myQuery.select(vehiculoRoot).where(p);
+		TypedQuery<Vehiculo> myFinal=this.entityManager.createQuery(myQueryCompleto);
+		
+		return myFinal.getResultList();
+	}
+
+	@Override
+	public Vehiculo buscarDinamicaPlaca(String placa) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		//Select v from Vehiculo Where v.marca:=marca
+		CriteriaBuilder builder=this.entityManager.getCriteriaBuilder();
+		//Especificamos el tipo de retorno
+		CriteriaQuery< Vehiculo> myQuery=builder.createQuery(Vehiculo.class);
+		//Construimos el sql
+		Root<Vehiculo>vehiculoRoot=myQuery.from(Vehiculo.class);//From persona
+		myQuery.select(vehiculoRoot);//select Vehiculo
+		
+		Predicate p=builder.equal(vehiculoRoot.get("placa"),placa );//where v.marca=marca
+		CriteriaQuery<Vehiculo> myQueryCompleto=myQuery.select(vehiculoRoot).where(p);
+		TypedQuery<Vehiculo> myFinal=this.entityManager.createQuery(myQueryCompleto);
+		
+		return myFinal.getSingleResult();
+		
 	}
 }

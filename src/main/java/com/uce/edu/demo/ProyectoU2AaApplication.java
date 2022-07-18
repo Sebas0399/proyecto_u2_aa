@@ -34,19 +34,8 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 		
 
 		
-		LOG.info(this.vehiculoService.buscarNativePlaca("PBA-145"));
-		
-		
-		
-		List<Vehiculo> listaV=this.vehiculoService.buscarNativeTipo("L");
-		for( Vehiculo v:listaV) {
-			LOG.info(v);
-		}
-	this.vehiculoService.buscarNamedNativePlaca("PBA-145");
-		listaV=this.vehiculoService.buscarNamedNativeMarca("Mazda");
-		for( Vehiculo v:listaV) {
-			LOG.info(v);
-		}
+		LOG.info(this.vehiculoService.buscaDinamicaMarca("Mazda"));
+		LOG.info(this.vehiculoService.buscarDinamicaPlaca("PBA-155"));
 	}
 
 }

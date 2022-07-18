@@ -19,4 +19,7 @@ public interface IVehiculoJpaService {
 	 public List<Vehiculo> buscarNativeTipo(String tipo);
 	 public Vehiculo buscarNamedNativePlaca(String placa);
 	 public List<Vehiculo> buscarNamedNativeMarca(String placa);
+	 
+	 public List<Vehiculo>buscaDinamicaMarca(String marca);
+	 public Vehiculo buscarDinamicaPlaca(String placa);
 }
