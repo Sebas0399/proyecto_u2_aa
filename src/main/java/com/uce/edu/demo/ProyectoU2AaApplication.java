@@ -34,8 +34,8 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 		
 
 		
-		LOG.info(this.vehiculoService.buscaDinamicaMarca("Mazda"));
-		LOG.info(this.vehiculoService.buscarDinamicaPlaca("PBA-155"));
+		LOG.info(this.vehiculoService.enumerarMarcas());
+		LOG.info(this.vehiculoService.buscarPorMarcaSencillo("Mazda"));
 	}
 
 }

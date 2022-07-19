@@ -3,6 +3,8 @@ package com.uce.edu.demo.repository;
 import java.util.List;
 
 import com.uce.edu.demo.repository.modelo.Vehiculo;
+import com.uce.edu.demo.repository.modelo.VehiculoMarcaEnumerar;
+import com.uce.edu.demo.repository.modelo.VehiculoSencillo;
 
 public interface IVehiculoJpaRepository {
 	public Vehiculo buscar(Integer id);
@@ -22,6 +24,10 @@ public interface IVehiculoJpaRepository {
 	 
 	 public List<Vehiculo>buscaDinamicaMarca(String marca);
 	 public Vehiculo buscarDinamicaPlaca(String placa);
+	 
+	 
+	 public List<VehiculoSencillo>buscarPorMarcaSencillo(String marca);
+	 public List<VehiculoMarcaEnumerar>enumerarMarcas();
 
 	 
 }

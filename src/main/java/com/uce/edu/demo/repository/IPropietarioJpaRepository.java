@@ -22,4 +22,6 @@ public interface IPropietarioJpaRepository {
 	 public Propietario buscarTyped(String cedula);
 	 public Propietario buscarNamed(String cedula);
 	 public Propietario buscarNamedTyped(String nombre,String apellido);
+	 
+	 
 }

@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.repository.modelo.Vehiculo;
+import com.uce.edu.demo.repository.modelo.VehiculoMarcaEnumerar;
+import com.uce.edu.demo.repository.modelo.VehiculoSencillo;
 
 @Repository
 @Transactional
@@ -148,5 +150,26 @@ public class VehiculoJpaRepositoryImpl implements IVehiculoJpaRepository{
 		
 		return myFinal.getSingleResult();
 		
+	}
+
+	@Override
+	public List<VehiculoSencillo> buscarPorMarcaSencillo(String marca) {
+		// TODO Auto-generated method stub
+		TypedQuery<VehiculoSencillo> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.repository.modelo.VehiculoSencillo(v.marca,v.tipo) FROM Vehiculo v WHERE v.marca=:marca",
+				VehiculoSencillo.class);
+		myQuery.setParameter("marca", marca);
+		return myQuery.getResultList();
+		
+	}
+
+	@Override
+	public List<VehiculoMarcaEnumerar> enumerarMarcas() {
+		// TODO Auto-generated method stub
+		TypedQuery<VehiculoMarcaEnumerar> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.repository.modelo.VehiculoMarcaEnumerar(v.marca,COUNT(v.marca)) FROM Vehiculo v GROUP BY v.marca",
+				VehiculoMarcaEnumerar.class);
+		
+		return myQuery.getResultList();
 	}
 }

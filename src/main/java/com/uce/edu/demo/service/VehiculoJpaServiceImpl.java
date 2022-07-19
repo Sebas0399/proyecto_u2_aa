@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.uce.edu.demo.repository.IVehiculoJpaRepository;
 import com.uce.edu.demo.repository.modelo.Vehiculo;
+import com.uce.edu.demo.repository.modelo.VehiculoMarcaEnumerar;
+import com.uce.edu.demo.repository.modelo.VehiculoSencillo;
 
 @Service
 public class VehiculoJpaServiceImpl implements IVehiculoJpaService{
@@ -88,6 +90,18 @@ public class VehiculoJpaServiceImpl implements IVehiculoJpaService{
 	public Vehiculo buscarDinamicaPlaca(String placa) {
 		// TODO Auto-generated method stub
 		return this.vehiculoRepo.buscarDinamicaPlaca(placa);
+	}
+
+	@Override
+	public List<VehiculoSencillo> buscarPorMarcaSencillo(String marca) {
+		// TODO Auto-generated method stub
+		return this.vehiculoRepo.buscarPorMarcaSencillo(marca);
+	}
+
+	@Override
+	public List<VehiculoMarcaEnumerar> enumerarMarcas() {
+		// TODO Auto-generated method stub
+		return this.vehiculoRepo.enumerarMarcas();
 	}
 
 }
