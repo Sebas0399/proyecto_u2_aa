@@ -15,6 +15,8 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.demo.repository.modelo.Persona;
+import com.uce.edu.demo.repository.modelo.PersonaContadorGenero;
+import com.uce.edu.demo.repository.modelo.PersonaSencilla;
 
 @Repository
 @Transactional
@@ -182,48 +184,67 @@ public class PersonaJpaRepositoryImpl implements IPersonaJpaRepository {
 	@Override
 	public Persona buscarDinamica(String nombre, String apellido, String genero) {
 		// TODO Auto-generated method stub
-		CriteriaBuilder myCriteria=this.entityManager.getCriteriaBuilder();
-		CriteriaQuery<Persona>myQuery=myCriteria.createQuery(Persona.class);
-		Root<Persona>myTabla=myQuery.from(Persona.class);
-		Predicate pNombre=myCriteria.equal(myTabla.get("nombre"), nombre);
-		Predicate pApellido=myCriteria.equal(myTabla.get("apellido"), apellido);
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Persona> myQuery = myCriteria.createQuery(Persona.class);
+		Root<Persona> myTabla = myQuery.from(Persona.class);
+		Predicate pNombre = myCriteria.equal(myTabla.get("nombre"), nombre);
+		Predicate pApellido = myCriteria.equal(myTabla.get("apellido"), apellido);
 		Predicate pFinal;
-		
-		if(genero.equals("M")) {
-			pFinal=myCriteria.and(pNombre,pApellido);
-		}
-		else {
-			 pFinal=myCriteria.or(pNombre,pApellido);
+
+		if (genero.equals("M")) {
+			pFinal = myCriteria.and(pNombre, pApellido);
+		} else {
+			pFinal = myCriteria.or(pNombre, pApellido);
 		}
 		myQuery.select(myTabla).where(pFinal);
-		
-		TypedQuery<Persona> myFinal = this.entityManager.createQuery(myQuery);
-		return myFinal.getSingleResult();
-	}
-	
-	public Persona buscarDinamica2(String nombre, String apellido, String genero) {
-		// TODO Auto-generated method stub
-		CriteriaBuilder myCriteria=this.entityManager.getCriteriaBuilder();
-		CriteriaQuery<Persona>myQuery=myCriteria.createQuery(Persona.class);
-		Root<Persona>myTabla=myQuery.from(Persona.class);
-		Predicate pNombre=myCriteria.equal(myTabla.get("nombre"), nombre);
-		Predicate pApellido=myCriteria.equal(myTabla.get("apellido"), apellido);
-		Predicate pGenero=myCriteria.equal(myTabla.get("genero"), genero);
-		Predicate pFinal;
-		
-		if(genero.equals("M")) {
-			pFinal=myCriteria.or(pNombre,pApellido);
-			pFinal=myCriteria.and(pFinal,pGenero);
-		}
-		else {
-			 pFinal=myCriteria.and(pNombre,pApellido);
-			 pFinal=myCriteria.or(pFinal,pGenero);
-		}
-		myQuery.select(myTabla).where(pFinal);
-		
+
 		TypedQuery<Persona> myFinal = this.entityManager.createQuery(myQuery);
 		return myFinal.getSingleResult();
 	}
 
+	public Persona buscarDinamica2(String nombre, String apellido, String genero) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myCriteria = this.entityManager.getCriteriaBuilder();
+		CriteriaQuery<Persona> myQuery = myCriteria.createQuery(Persona.class);
+		Root<Persona> myTabla = myQuery.from(Persona.class);
+		Predicate pNombre = myCriteria.equal(myTabla.get("nombre"), nombre);
+		Predicate pApellido = myCriteria.equal(myTabla.get("apellido"), apellido);
+		Predicate pGenero = myCriteria.equal(myTabla.get("genero"), genero);
+		Predicate pFinal;
+
+		if (genero.equals("M")) {
+			pFinal = myCriteria.or(pNombre, pApellido);
+			pFinal = myCriteria.and(pFinal, pGenero);
+		} else {
+			pFinal = myCriteria.and(pNombre, pApellido);
+			pFinal = myCriteria.or(pFinal, pGenero);
+		}
+		myQuery.select(myTabla).where(pFinal);
+
+		TypedQuery<Persona> myFinal = this.entityManager.createQuery(myQuery);
+		return myFinal.getSingleResult();
+	}
+
+	@Override
+	public List<PersonaSencilla> buscarPorApellidoSencillo(String apellido) {
+		// TODO Auto-generated method stub
+		TypedQuery<PersonaSencilla> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.repository.modelo.PersonaSencilla(p.nombre,p.apellido) FROM Persona p WHERE p.apellido=:apellido   ",
+				PersonaSencilla.class);
+		myQuery.setParameter("apellido", apellido);
+		return myQuery.getResultList();
+	}
+
+	@Override
+	public List<PersonaContadorGenero> contarGenero() {
+		// TODO Auto-generated method stub
+		//SELECT pers_genero ,COUNT (pers_genero)FROM persona group by pers_genero
+		//SELECT p.genero.COUNT(p.genero) FROM Persona p GROUP BY p.genero
+		TypedQuery<PersonaContadorGenero> myQuery = this.entityManager.createQuery(
+				"SELECT NEW com.uce.edu.demo.repository.modelo.PersonaContadorGenero(p.genero,COUNT(p.genero)) FROM Persona p GROUP BY p.genero ",
+				PersonaContadorGenero.class);
+		
+		return myQuery.getResultList();
+	}
 
 }
