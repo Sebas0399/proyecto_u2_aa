@@ -11,41 +11,59 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.demo.repository.modelo.manytomany.Autor;
+import com.uce.edu.demo.repository.modelo.manytomany.Autor2;
 import com.uce.edu.demo.repository.modelo.manytomany.Libro;
-import com.uce.edu.demo.service.ILibroService;
+import com.uce.edu.demo.repository.modelo.manytomany.Libro2;
+import com.uce.edu.demo.repository.modelo.manytomany.Libro2Autor2;
+import com.uce.edu.demo.service.IAutor2Service;
+import com.uce.edu.demo.service.ILibro2Autor2Service;
+import com.uce.edu.demo.service.ILibro2Service;
 
 @SpringBootApplication
 public class ProyectoU2AaApplication implements CommandLineRunner {
 	private static Logger LOG = LogManager.getLogger(ProyectoU2AaApplication.class.getName());
 	@Autowired
-	private ILibroService libroService;
+	private ILibro2Service iLibro2Service;
+
+	@Autowired
+	private IAutor2Service iAutor2Service;
+
+	@Autowired
+	private ILibro2Autor2Service iLibro2Autor2Service;
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AaApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		Autor a=new Autor();
-		a.setNombre("Marco");
+		Autor2 a=new Autor2();
+		a.setNombre("Sebas");
 		
-		Autor a2=new Autor();
-		a2.setNombre("Jose");
-		Set<Autor>autores=new HashSet<>();
-		autores.add(a);
-		autores.add(a2);
-
+		this.iAutor2Service.insertar(a);
 		
-		Libro l=new Libro();
-		l.setTitulo("Pricipito");
-		l.setCantidadPaginas(150);
+		Autor2 a2=new Autor2();
+		a2.setNombre("Antony");
+		this.iAutor2Service.insertar(a2);
 		
-		Set<Libro>libros=new HashSet<>();
-		//a.setLibros(null);
-		l.setAutores(autores);
+		Libro2 l=new Libro2();
+		l.setTitulo("Pedro Paramo");
+		l.setCantidadPaginas(200);
+		this.iLibro2Service.insertar(l);
 		
-	this.libroService.insertar(l);
+		Libro2 l2=new Libro2();
+		l2.setTitulo("Principito");
+		l2.setCantidadPaginas(150);
+		this.iLibro2Service.insertar(l2);
 		
+		Libro2Autor2 li2au2=new Libro2Autor2();
+		li2au2.setAutor2(a);
+		li2au2.setLibro2(l);
+		this.iLibro2Autor2Service.insertar(li2au2);
 		
+		Libro2Autor2 li2au22=new Libro2Autor2();
+		li2au22.setAutor2(a2);
+		li2au22.setLibro2(l2);
+		this.iLibro2Autor2Service.insertar(li2au22);
 	}
 
 }
