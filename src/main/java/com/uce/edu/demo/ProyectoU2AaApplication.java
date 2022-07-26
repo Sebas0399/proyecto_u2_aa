@@ -1,7 +1,7 @@
 package com.uce.edu.demo;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,58 +10,40 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.demo.repository.modelo.onetomany.Factura;
-import com.uce.edu.demo.repository.modelo.onetomany.Producto;
-import com.uce.edu.demo.service.IFacturaService;
-import com.uce.edu.demo.service.IProductoService;
+import com.uce.edu.demo.repository.modelo.manytomany.Autor;
+import com.uce.edu.demo.repository.modelo.manytomany.Libro;
+import com.uce.edu.demo.service.ILibroService;
 
 @SpringBootApplication
 public class ProyectoU2AaApplication implements CommandLineRunner {
 	private static Logger LOG = LogManager.getLogger(ProyectoU2AaApplication.class.getName());
 	@Autowired
-	private IFacturaService facturaService;
-	
-	@Autowired
-	private IProductoService productoService;
+	private ILibroService libroService;
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoU2AaApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
+		Autor a=new Autor();
+		a.setNombre("Marco");
 		
-		Factura f1=new Factura();
-		f1.setFecha(LocalDateTime.now());
-		this.facturaService.insertar(f1);
+		Autor a2=new Autor();
+		a2.setNombre("Jose");
+		Set<Autor>autores=new HashSet<>();
+		autores.add(a);
+		autores.add(a2);
+
 		
-		Producto p1=new Producto();
-		p1.setNombre("Galleta");
-		p1.setTipo("Comestibles");
-		p1.setPrecio(new BigDecimal(1));
-		p1.setFactura(f1);
-		this.productoService.insertar(p1);
-		Producto p2=new Producto();
-		p2.setNombre("Lava");
-		p2.setTipo("Limpieza");
-		p2.setPrecio(new BigDecimal(2));
-		p2.setFactura(f1);
-		this.productoService.insertar(p2);
-		Producto p3=new Producto();
-		p3.setNombre("Teclado");
-		p3.setTipo("Tecnologia");
-		p3.setPrecio(new BigDecimal(10));
-		p3.setFactura(f1);
-		this.productoService.insertar(p3);
+		Libro l=new Libro();
+		l.setTitulo("Pricipito");
+		l.setCantidadPaginas(150);
 		
+		Set<Libro>libros=new HashSet<>();
+		//a.setLibros(null);
+		l.setAutores(autores);
 		
-		//buscar
-		this.facturaService.buscar(1);
-		
-		//actualizar
-		f1.setFecha(LocalDateTime.now());
-		this.facturaService.actualizar(f1);
-		//eliminar
-		this.facturaService.eliminar(1);
+	this.libroService.insertar(l);
 		
 		
 	}
