@@ -8,6 +8,7 @@ import com.uce.edu.demo.repository.modelo.Propietario;
 
 public interface IPropietarioJpaRepository {
 	 public Propietario buscar(Integer id);
+	 public Propietario buscar(String cedula);
 	 public List<Propietario> buscarPorApellido(String apellido);
 	 public List<Propietario> buscarPorNombre(String nombre);
 

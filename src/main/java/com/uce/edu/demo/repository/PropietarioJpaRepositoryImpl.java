@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -25,7 +26,7 @@ public class PropietarioJpaRepositoryImpl implements IPropietarioJpaRepository{
 	@Override
 	public List<Propietario> buscarPorApellido(String apellido) {
 		// TODO Auto-generated method stub
-		Query jpqlQuery=this.entityManager.createQuery("SELECT p FROM Propietario p WHERE p.apellido_prop:=apellido");
+		Query jpqlQuery=this.entityManager.createQuery("SELECT p FROM Propietario p WHERE p.apellido:=apellido");
 		jpqlQuery.setParameter("apellido", apellido);
 		return jpqlQuery.getResultList();
 	}
@@ -81,6 +82,16 @@ public class PropietarioJpaRepositoryImpl implements IPropietarioJpaRepository{
 		Query myQuery=this.entityManager.createQuery("DELETE from Propietario p WHERE p.fecha_Nacimiento_Pers:=fecha");
 		myQuery.setParameter("fecha", fecha);
 		return myQuery.executeUpdate();
+	}
+
+	@Override
+	public Propietario buscar(String cedula) {
+		// TODO Auto-generated method stub
+		TypedQuery<Propietario> miTypedQuery = this.entityManager
+				.createQuery("SELECT p FROM Propietario p WHERE p.cedula = :cedula", Propietario.class);
+		miTypedQuery.setParameter("cedula", cedula);
+		return miTypedQuery.getSingleResult();
+		
 	}
 
 }

@@ -7,28 +7,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 @Entity
 @Table(name="vehiculo")
 public class Vehiculo {
 	@Id
-	@Column(name="id_vehi")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="name_generator")
-	@SequenceGenerator(name="name_generator",sequenceName="vehi_id_seq",allocationSize = 1)
+	@Column(name="vehi_id")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="vehi_id_seq")
+	@SequenceGenerator(name="vehi_id_seq",sequenceName="vehi_id_seq",allocationSize = 1)
 
 	private Integer id;
-	@Column(name="marca_vehi")
+	@Column(name="vehi_marca")
 
 	private String marca;
-	@Column(name="placa_vehi")
+	@Column(name="vehi_placa")
 	private String placa;
-	@Column(name="tipo_vehi")
+	@Column(name="vehi_tipo")
 
 	private String tipo;
-	@Column(name="precio_vehi")
+	@Column(name="vehi_precio")
 
 	private BigDecimal precio;
+	
+	@OneToOne(mappedBy = "vehiculo")
+	private Matricula matricula;
 	//set y get
 	public Integer getId() {
 		return id;
@@ -60,10 +64,16 @@ public class Vehiculo {
 	public void setPrecio(BigDecimal precio) {
 		this.precio = precio;
 	}
+	public Matricula getMatricula() {
+		return matricula;
+	}
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
+	}
 	@Override
 	public String toString() {
 		return "Vehiculo [id=" + id + ", marca=" + marca + ", placa=" + placa + ", tipo=" + tipo + ", precio=" + precio
-				+ "]";
+				+ ", matricula=" + matricula + "]";
 	}
 	
 }

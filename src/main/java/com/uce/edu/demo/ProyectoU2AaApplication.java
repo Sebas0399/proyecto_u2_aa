@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.uce.edu.demo.repository.modelo.Matricula;
 import com.uce.edu.demo.repository.modelo.Propietario;
 import com.uce.edu.demo.repository.modelo.Vehiculo;
-import com.uce.edu.demo.service.IMatriculaJpaService;
+import com.uce.edu.demo.service.IMatriculaGestorService;
 import com.uce.edu.demo.service.IPropietarioJpaService;
 import com.uce.edu.demo.service.IVehiculoJpaService;
 
@@ -24,7 +24,7 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 	@Autowired
 	private IVehiculoJpaService vehiculoService;
 	@Autowired
-	private IMatriculaJpaService matriculaService;
+	private IMatriculaGestorService matriculaService;
 	private static Logger LOG = LogManager.getLogger(ProyectoU2AaApplication.class.getName());
 
 	public static void main(String[] args) {
@@ -39,13 +39,13 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 		Propietario p=new Propietario();
 		p.setNombre("Antony");
 		p.setApellido("Arguello");
-		p.setCedula("1725776650");
+		p.setCedula("0201114021");
 		p.setFechaNacimiento(LocalDateTime.now());
 		this.propietarioService.insertar(p);
 		//Vehiculp
 		Vehiculo v=new Vehiculo();
 		v.setMarca("Mazda");
-		v.setPlaca("PBA-145");
+		v.setPlaca("PBA-156");
 		v.setPrecio(new BigDecimal("15000"));
 		v.setTipo("P");
 		this.vehiculoService.insertar(v);
@@ -53,7 +53,10 @@ public class ProyectoU2AaApplication implements CommandLineRunner {
 		Matricula m=new Matricula();
 		m.setFechaMatricula(LocalDateTime.now());
 		m.setValorMatricula(new BigDecimal("100"));
-		this.matriculaService.insertar(m);
+		m.setPropietario(p);
+		m.setVehiculo(v);
+		matriculaService.generarMatricula("0201114021", "PBA-156");
+	
 	}
 
 }

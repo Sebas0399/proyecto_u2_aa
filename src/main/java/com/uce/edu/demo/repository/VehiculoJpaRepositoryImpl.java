@@ -2,6 +2,7 @@ package com.uce.edu.demo.repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -39,5 +40,14 @@ public class VehiculoJpaRepositoryImpl implements IVehiculoJpaRepository{
 		// TODO Auto-generated method stub
 		Vehiculo v=this.buscar(id);
 		this.entityManager.remove(v);;
+	}
+
+	@Override
+	public Vehiculo buscar(String placa) {
+		// TODO Auto-generated method stub
+		TypedQuery<Vehiculo> miTypedQuery = this.entityManager
+				.createQuery("SELECT v FROM Vehiculo v WHERE v.placa = :placa", Vehiculo.class);
+		miTypedQuery.setParameter("placa", placa);
+		return miTypedQuery.getSingleResult();
 	}
 }
